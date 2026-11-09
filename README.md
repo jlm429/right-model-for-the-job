@@ -1,10 +1,34 @@
 # The right model for the job
 
-**Frontier models aren't always the best tool for the job.**
+Comparing task-specific and frontier AI models on accuracy, latency, cost, and flexibility.
 
-CIFAR-10 makes the tradeoff concrete: a small CNN reached **79.08%** test accuracy, and an ImageNet-pretrained ResNet-50 fine-tuned on the task reached **94.03%**. A separate zero-shot GPT-6.1 Sol pilot achieved **83/100** correct classifications. These are different evaluation protocols, so the pilot does **not** establish a head-to-head ranking against the local models.
+Using CIFAR-10, this project explores three approaches:
 
-This repository preserves the measured evidence and provides portable PyTorch reproduction code. It is an educational case study in model choice: task-specific training can be valuable, while general-purpose models offer zero-shot capability, broad applicability, and a way to avoid building a dedicated training pipeline.
+| Model | Accuracy | Evaluation | Est. API cost / 10K images |
+|---|---:|---|---:|
+| CNN | 79.08% | 10K test | $0 |
+| ResNet-50 (fine-tuned) | 94.03% | 10K test | $0 |
+| GPT-6.1 Sol (zero-shot) | 83.00% | 100 validation | ~$5–$20 |
+
+**The GPT pilot used a different evaluation set and is not a direct accuracy comparison. Its API cost range is illustrative, not measured or derived from recorded token usage.** The $0 entries refer to API charges; local hardware, energy, and training still have costs.
+
+Beyond accuracy, deployment matters. ResNet-50 classified 10,000 images locally in **52.2 seconds**, without per-request API charges. Frontier models offer zero-shot flexibility without task-specific training, but hosted inference introduces API costs and network latency.
+
+This repository provides reproducible PyTorch experiments and explores the tradeoffs in choosing the right model for the task.
+
+## Experimental visuals
+
+![ResNet-50 learning curves](figures/resnet50_learning.png)
+
+*The dashed line marks unfreezing. Validation improves through all four epochs. Online augmented training accuracy and deterministic validation accuracy use different conditions; a training accuracy drop when unfreezing is insufficient evidence of worsening generalization.*
+
+![CNN study learning curves](figures/cnn_learning.png)
+
+*Actual train/validation accuracy for the historical controlled experiments. The original 50,000-image baseline had no saved independent validation curve. Regularization and longer training improved validation performance, but adding interventions did not monotonically improve it. This is one-seed evidence, not a universal ordering of methods.*
+
+![ResNet-50 normalized confusion matrix](figures/resnet50_confusion.png)
+
+*Rows are true classes; columns are predictions. Each row contains 1,000 test examples. Cat remains the weakest ResNet-50 class, despite a substantial improvement over the CNN.*
 
 ## Dataset and protocols
 
@@ -32,10 +56,6 @@ The original model has three 3 × 3 convolution blocks (3→32→64→128), each
 
 Original training used Adam, learning rate 0.001, batch size 128, seed 42, and no augmentation. The selected improved model also used Adam 0.001 and batch 128, **without augmentation or a scheduler**, up to 20 epochs, early-stopping patience 5, strict best validation accuracy with earliest-epoch ties. Its best validation accuracy was 80.58% at epoch 15. The broader historical study compared longer training, crop/flip augmentation, BN/dropout, and combined regularization plus cosine scheduling; the BN/dropout run won validation selection. BN and dropout were a bundled intervention, not separately isolated.
 
-![CNN study learning curves](figures/cnn_learning.png)
-
-*Actual train/validation accuracy for the historical controlled experiments. The original 50,000-image baseline had no saved independent validation curve. Regularization and longer training improved validation performance, but adding interventions did not monotonically improve it. This is one-seed evidence, not a universal ordering of methods.*
-
 ResNet-50 uses torchvision ImageNet weights (`ResNet50_Weights.DEFAULT`, resolved to `IMAGENET1K_V2`) and replaces the 2,048→1,000 classifier with a 2,048→10 head: **23,528,522 parameters**. Training uses RandomResizedCrop(224), scale 0.8–1.0, ratio 0.9–1.1, horizontal flip, and ImageNet normalization. Evaluation uses the saved weight preset: resize to 232, center crop to 224. Interpolation adapts the input to the pretrained network; it cannot restore details absent from the original 32 × 32 pixels.
 
 | ResNet-50 setting | Recorded value |
@@ -53,17 +73,9 @@ ResNet-50 uses torchvision ImageNet weights (`ResNet50_Weights.DEFAULT`, resolve
 
 The frozen backbone remains in evaluation mode, including batch-normalization statistics, while the head learns. Full fine-tuning starts from the best head checkpoint with lower, separate learning rates. The training timing includes training, validation, and checkpoint work. Test total time includes loading, preprocessing, transfers, and forward passes; model timing synchronizes MPS after input transfer. These timings are specific to this setup. They are not API comparisons.
 
-![ResNet-50 learning curves](figures/resnet50_learning.png)
-
-*The dashed line marks unfreezing. Validation improves through all four epochs. Online augmented training accuracy and deterministic validation accuracy use different conditions; a training accuracy drop when unfreezing is insufficient evidence of worsening generalization.*
-
 ImageNet pretraining supplies reusable visual features before CIFAR-10 fine-tuning. Task supervision adapts those features and a closed ten-class decision boundary to this dataset. That is a plausible explanation for the strong result; this experiment did not ablate pretraining or match architecture and compute budgets to establish a causal attribution.
 
 ## Class-level errors
-
-![ResNet-50 normalized confusion matrix](figures/resnet50_confusion.png)
-
-*Rows are true classes; columns are predictions. Each row contains 1,000 test examples. Cat remains the weakest ResNet-50 class, despite a substantial improvement over the CNN.*
 
 The improved CNN's largest directed confusions include cat→dog (179) and dog→cat (121). ResNet-50 reduces these to **83** and **45**, respectively. Other frequent ResNet errors include ship→airplane (28), deer→horse (27), bird→cat (26), and truck→automobile (25). Animals and vehicles with related shapes remain plausible ambiguity sources, especially at this resolution; confirming that explanation would require a systematic image audit.
 
