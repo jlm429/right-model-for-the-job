@@ -131,7 +131,7 @@ python evaluate.py --run runs/resnet50
 python plots.py --metrics-dir results/resnet50 --output runs/historical_errors.png
 ```
 
-Use `--data-dir PATH` to reuse an existing torchvision dataset and `--no-download` to forbid downloads. The ResNet run can be slow on CPU. Recorded MPS training was 41.9 minutes with batch 16; this is not a portable runtime guarantee. The saved one-hour budget plus five-minute reserve is retained; the portable runner checks the budget between complete epochs, so a slow first epoch can overrun it. Stop before launching a full run if your hardware budget is insufficient. A `--smoke-max-batches 1` training run is explicitly labeled non-comparable and must use its own output directory.
+Use `--data-dir PATH` to reuse an existing torchvision dataset and `--no-download` to forbid downloads. The ResNet run can be slow on CPU. Recorded MPS training was 41.9 minutes with batch 16; this is not a portable runtime guarantee. The saved one-hour budget includes a five-minute evaluation reserve; the portable runner checks the budget between complete epochs, so a slow first epoch can overrun it. Stop before launching a full run if your hardware budget is insufficient. A `--smoke-max-batches 1` training run is explicitly labeled non-comparable and must use its own output directory.
 
 Training writes `config.json`, `environment.json`, `history.json`, selected `best.pt`, `selection.json`, and learning curves. It does not evaluate the test set. Evaluation checks the selected checkpoint/configuration hashes, caches one complete test pass, and writes metrics, class CSV, predictions, confusion plots, timing, and errors. Re-running evaluation reuses the prediction cache. A recorded incomplete test pass refuses automatic retry and requires explicit reconciliation.
 
@@ -145,7 +145,7 @@ The source architectures, preprocessing, and hyperparameters were preserved in t
 - CIFAR-10 is a public, widely studied dataset. Pretraining overlap or benchmark familiarity cannot be excluded for ImageNet weights or frontier models. Zero-shot here means no task-specific fine-tuning during this experiment, not proof the model never saw CIFAR-10.
 - 32 × 32 images discard detail. Resizing cannot create lost visual evidence. Fixed categories also make this narrower than general visual reasoning.
 - A local forward pass has no per-request API fee, but hardware, energy, training, maintenance, and deployment still cost resources. No measured API latency/cost comparison is available.
-- Full local test results were measured after validation-based selection, but broader conclusions need replicated seeds and a genuinely new evaluation cohort.
+- The improved CNN and ResNet-50 test results followed validation-based selection; the original CNN used its fixed final epoch without validation. Broader conclusions need replicated seeds and a genuinely new evaluation cohort.
 
 ## Future experiments
 
