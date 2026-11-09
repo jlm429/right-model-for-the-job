@@ -1,0 +1,6 @@
+# Historical experiment environment: Python 3.12.13.
+torch==2.10.0
+torchvision==0.25.0
+numpy==2.5.4
+Pillow==13.0.0
+matplotlib==3.11.2

@@ -1,0 +1,24 @@
+# Local data, weights, run outputs and environments
+/data/
+/runs/
+.venv/
+venv/
+*.pt
+*.pth
+*.ckpt
+*.tar.gz
+__pycache__/
+*.py[cod]
+.cache/
+.pytest_cache/
+.ruff_cache/
+.DS_Store
+.ipynb_checkpoints/
+# Credentials and local machine configuration
+.env
+.env.*
+!.env.example
+*credentials*
+*service_account*
+*.pem
+*.key

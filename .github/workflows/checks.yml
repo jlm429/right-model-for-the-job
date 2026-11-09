@@ -1,0 +1,26 @@
+name: Lightweight checks
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  offline-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install CPU PyTorch and dependencies
+        run: |
+          python -m pip install torch==2.10.0 torchvision==0.25.0 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install -r requirements.txt
+      - name: Offline behavioral tests and command help
+        run: |
+          python -m unittest discover -s tests -v
+          python train.py --help
+          python evaluate.py --help
+          python plots.py --help

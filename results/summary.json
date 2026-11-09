@@ -1,0 +1,106 @@
+{
+  "local_results": [
+    {
+      "model": "original",
+      "provenance": "locally verified saved metrics and cached logits",
+      "cohort": "official CIFAR-10 test set",
+      "images": 10000,
+      "accuracy": 0.7116,
+      "macro_f1": 0.7116681306911636,
+      "cat_f1": 0.5417439703153989,
+      "bird_f1": 0.6066518847006652
+    },
+    {
+      "model": "improved",
+      "provenance": "locally verified saved metrics and cached logits",
+      "cohort": "official CIFAR-10 test set",
+      "images": 10000,
+      "accuracy": 0.7908,
+      "macro_f1": 0.7889980863294113,
+      "cat_f1": 0.6258295048494129,
+      "bird_f1": 0.6884875846501128
+    },
+    {
+      "model": "resnet50",
+      "provenance": "locally verified saved metrics and cached logits",
+      "cohort": "official CIFAR-10 test set",
+      "images": 10000,
+      "accuracy": 0.9403,
+      "macro_f1": 0.9403643984062251,
+      "cat_f1": 0.881818181818182,
+      "bird_f1": 0.9362769693928752
+    }
+  ],
+  "frontier_pilot": {
+    "provenance": "owner-supplied; completed raw prediction export unavailable locally; not independently reproduced",
+    "api": "Responses API",
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "medium",
+    "cohort": "balanced training-validation pilot",
+    "images": 100,
+    "per_class_support": 10,
+    "correct": 83,
+    "accuracy": 0.83,
+    "valid_classifications": 100,
+    "failed_requests": 0,
+    "wilson_95_interval_supplied": [
+      0.7445,
+      0.8911
+    ],
+    "per_class_f1": {
+      "airplane": 0.824,
+      "automobile": 0.75,
+      "bird": 0.889,
+      "cat": 0.588,
+      "deer": 0.857,
+      "dog": 0.75,
+      "frog": 0.9,
+      "horse": 0.909,
+      "ship": 0.952,
+      "truck": 0.833
+    },
+    "confusions": [
+      {
+        "true": "automobile",
+        "predicted": "truck",
+        "count": 4
+      },
+      {
+        "true": "cat",
+        "predicted": "dog",
+        "count": 4
+      }
+    ],
+    "latency_seconds": null,
+    "token_usage": null,
+    "measured_cost_usd": null,
+    "exact_completed_pilot_indices_available": false
+  },
+  "exploratory_smoke_tests": [
+    {
+      "model": "gpt-6.1-sol",
+      "correct": 9,
+      "images": 10,
+      "provenance": "owner-supplied exploratory result"
+    },
+    {
+      "model": "gpt-5.6-sol",
+      "correct": 8,
+      "images": 10,
+      "provenance": "owner-supplied exploratory result"
+    },
+    {
+      "model": "gpt-5.4-mini",
+      "correct": 6,
+      "images": 10,
+      "provenance": "owner-supplied exploratory result"
+    },
+    {
+      "model": "gpt-5.4",
+      "correct": 4,
+      "images": 10,
+      "provenance": "owner-supplied exploratory result"
+    }
+  ],
+  "comparison_warning": "Full 10000-image supervised test results and a separate 100-image zero-shot validation pilot are not a controlled head-to-head benchmark."
+}

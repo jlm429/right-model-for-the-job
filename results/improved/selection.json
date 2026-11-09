@@ -1,0 +1,12 @@
+{
+  "id": "E3",
+  "best_validation_accuracy": 0.8058,
+  "best_epoch": 15,
+  "epochs_run": 20,
+  "training_seconds": 95.05500899994513,
+  "parameters": 357258,
+  "stopped_early": false,
+  "checkpoint_sha256": "ab7090372b91c27fe53f2a24eec461e87ee2dbc2ec5f4d337197f5c9428f36a0",
+  "config_sha256": "3d1a6dd123f049c9c175b029a1f08ad029aa271964590a12872a626a98d15cf9",
+  "completed_at": "2026-11-06T16:05:24.246804+00:00"
+}
