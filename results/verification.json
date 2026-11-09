@@ -1,0 +1,45 @@
+{
+  "dataset_images": 50000,
+  "split_verified": true,
+  "models": {
+    "original": {
+      "checkpoint_sha256": "43134973a6e64981324a17547696bb5e2ee7f2d968217963f596ba316fd068e1",
+      "parameters": 356810,
+      "strict_checkpoint_load": true,
+      "validation_forward_images": 2,
+      "historical_logits_equal": true,
+      "cached_test_logits_recomputed": true,
+      "test_accuracy": 0.7116,
+      "macro_f1": 0.7116681306911636
+    },
+    "improved": {
+      "checkpoint_sha256": "ab7090372b91c27fe53f2a24eec461e87ee2dbc2ec5f4d337197f5c9428f36a0",
+      "parameters": 357258,
+      "strict_checkpoint_load": true,
+      "validation_forward_images": 2,
+      "historical_logits_equal": true,
+      "cached_test_logits_recomputed": true,
+      "test_accuracy": 0.7908,
+      "macro_f1": 0.7889980863294113
+    },
+    "resnet50": {
+      "checkpoint_sha256": "0d1038e8df3f97e24f38c2cb41f4df4b8195ea9bb2b03ad5fcbbfb1714898651",
+      "parameters": 23528522,
+      "strict_checkpoint_load": true,
+      "validation_forward_images": 2,
+      "historical_logits_equal": null,
+      "cached_test_logits_recomputed": true,
+      "test_accuracy": 0.9403,
+      "macro_f1": 0.9403643984062251
+    }
+  },
+  "api_calls": 0,
+  "full_training_runs": 0,
+  "full_test_inference_runs": 0,
+  "notebook_valid_with_cleared_outputs": true,
+  "original_files_verified_unchanged": 17824,
+  "publication_paths_containing_private_absolute_paths": [],
+  "offline_unit_tests_passed": 7,
+  "verification_date": "2026-11-09",
+  "scope": "Local compatibility and saved-logit verification; no full training, no new full test inference, no paid API calls."
+}

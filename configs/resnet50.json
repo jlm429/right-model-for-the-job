@@ -1,0 +1,30 @@
+{
+  "seed": 42,
+  "batch_size": 16,
+  "workers": 0,
+  "device": "auto",
+  "head_epochs": 2,
+  "finetune_epochs": 2,
+  "head_lr": 0.001,
+  "backbone_lr": 1e-05,
+  "finetune_head_lr": 0.0001,
+  "weight_decay": 0.0001,
+  "patience": 3,
+  "scheduler": "cosine",
+  "budget_seconds": 3600,
+  "reserve_seconds": 300,
+  "crop_scale": [
+    0.8,
+    1.0
+  ],
+  "threads": 4,
+  "checkpoint_rule": "highest validation accuracy; earliest global epoch on ties",
+  "precision": "float32",
+  "deterministic_algorithms": false,
+  "experiment": "resnet50",
+  "pretrained_weights": "ResNet50_Weights.IMAGENET1K_V2",
+  "crop_ratio": [
+    0.9,
+    1.1
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "locked_at": "2026-11-06T16:07:08.978306+00:00",
+  "run": "E3",
+  "best_epoch": 15,
+  "best_validation_accuracy": 0.8058,
+  "checkpoint_sha256": "ab7090372b91c27fe53f2a24eec461e87ee2dbc2ec5f4d337197f5c9428f36a0",
+  "config": {
+    "seed": 42,
+    "batch_size": 128,
+    "optimizer": "Adam",
+    "lr": 0.001,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "weight_decay": 0,
+    "amsgrad": false,
+    "max_epochs": 20,
+    "patience": 5,
+    "min_delta": 0,
+    "checkpoint_rule": "highest validation accuracy; earliest epoch on a tie",
+    "early_stop": "stop after 5 consecutive epochs without strict validation accuracy improvement",
+    "normalization_mean": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "normalization_std": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "train_size": 45000,
+    "validation_size": 5000,
+    "num_workers": 0,
+    "architecture": "bn_dropout",
+    "augmentation": false,
+    "scheduler": null,
+    "id": "E3"
+  },
+  "config_sha256": "3d1a6dd123f049c9c175b029a1f08ad029aa271964590a12872a626a98d15cf9",
+  "selection_uses": "validation only; ties by E0-control,E1,E2,E3,E4 order",
+  "candidate_summaries": [
+    {
+      "id": "E0-control",
+      "best_validation_accuracy": 0.7344,
+      "best_epoch": 5,
+      "epochs_run": 5,
+      "training_seconds": 21.183528541005217,
+      "parameters": 356810,
+      "stopped_early": false,
+      "checkpoint_sha256": "c7df26b1a3feb31dce8250c896f045131dfe98acb00ceba17ce32e24cf1b35f3",
+      "config_sha256": "805ceeaddd97a35037cd6b42e1c3c16df7a599ec04d90ba9bcab37b21610ed34",
+      "completed_at": "2026-11-06T16:01:02.315932+00:00"
+    },
+    {
+      "id": "E1",
+      "best_validation_accuracy": 0.765,
+      "best_epoch": 11,
+      "epochs_run": 16,
+      "training_seconds": 68.36566358298296,
+      "parameters": 356810,
+      "stopped_early": true,
+      "checkpoint_sha256": "edd96e3ebe57e86211d19d8e14b6a39c3ce3d6c1271e12724a2918c6be4a774d",
+      "config_sha256": "9837ddb3527c04d5fdc8b4d35f7c9ec569a13a98b3222a4bc7f2ef9ec91c1a41",
+      "completed_at": "2026-11-06T16:02:11.154092+00:00"
+    },
+    {
+      "id": "E2",
+      "best_validation_accuracy": 0.8,
+      "best_epoch": 20,
+      "epochs_run": 20,
+      "training_seconds": 97.02998816699255,
+      "parameters": 356810,
+      "stopped_early": false,
+      "checkpoint_sha256": "d0f08c978a30aa9ea44597124989f14ac13aee862f61daab0a0d58346c373671",
+      "config_sha256": "b9760d84d43aed3a7c279ca138db51ec7500bef874b29471b57d258c6a25f9e3",
+      "completed_at": "2026-11-06T16:03:48.676373+00:00"
+    },
+    {
+      "id": "E3",
+      "best_validation_accuracy": 0.8058,
+      "best_epoch": 15,
+      "epochs_run": 20,
+      "training_seconds": 95.05500899994513,
+      "parameters": 357258,
+      "stopped_early": false,
+      "checkpoint_sha256": "ab7090372b91c27fe53f2a24eec461e87ee2dbc2ec5f4d337197f5c9428f36a0",
+      "config_sha256": "3d1a6dd123f049c9c175b029a1f08ad029aa271964590a12872a626a98d15cf9",
+      "completed_at": "2026-11-06T16:05:24.246804+00:00"
+    },
+    {
+      "id": "E4",
+      "best_validation_accuracy": 0.799,
+      "best_epoch": 19,
+      "epochs_run": 20,
+      "training_seconds": 104.19105170801049,
+      "parameters": 357258,
+      "stopped_early": false,
+      "checkpoint_sha256": "3dc9d256b9c6adef757a473099159892ba5f127e8a681987f246a63f9d23eab2",
+      "config_sha256": "d0b85b9eccc9f080e626a1e3174000e9097f5b3bc13f587b09eb1e3c5e64fee7",
+      "completed_at": "2026-11-06T16:07:08.977761+00:00"
+    }
+  ],
+  "no_retraining": true
+}

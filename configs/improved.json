@@ -1,0 +1,36 @@
+{
+  "seed": 42,
+  "batch_size": 128,
+  "optimizer": "Adam",
+  "lr": 0.001,
+  "betas": [
+    0.9,
+    0.999
+  ],
+  "eps": 1e-08,
+  "weight_decay": 0,
+  "amsgrad": false,
+  "max_epochs": 20,
+  "patience": 5,
+  "min_delta": 0,
+  "checkpoint_rule": "highest validation accuracy; earliest epoch on a tie",
+  "early_stop": "stop after 5 consecutive epochs without strict validation accuracy improvement",
+  "normalization_mean": [
+    0.5,
+    0.5,
+    0.5
+  ],
+  "normalization_std": [
+    0.5,
+    0.5,
+    0.5
+  ],
+  "train_size": 45000,
+  "validation_size": 5000,
+  "num_workers": 0,
+  "architecture": "bn_dropout",
+  "augmentation": false,
+  "scheduler": null,
+  "id": "E3",
+  "experiment": "improved"
+}

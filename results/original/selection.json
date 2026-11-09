@@ -1,0 +1,6 @@
+{
+  "selected_epoch": 5,
+  "selection_rule": "Fixed final epoch; no validation",
+  "training_seconds": 24.039564291015267,
+  "parameters": 356810
+}
